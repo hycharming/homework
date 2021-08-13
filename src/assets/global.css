@@ -1,0 +1,28 @@
+/* 全局样式表 */
+html,
+body,
+#app {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* 页面背景色 */
+#app {
+    background-color: #f3f3f3;
+}
+
+
+.el-menu-item i {
+    color: white
+}
+
+/* 输入框背景色 */
+/* .el-input__inner{
+    background-color: #f3f3f3;
+} */
+
+.el-popover {
+    border-color: #00B4CF !important;
+    box-shadow: 0px 3px 5px #949494;
+}

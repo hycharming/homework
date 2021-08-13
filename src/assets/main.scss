@@ -1,0 +1,142 @@
+@media only screen and (max-width: 768px) {
+    .home_container {
+
+        // background-color: red;
+        .el-header {
+            .navbar {
+                .blank {
+                    opacity: inherit;
+                }
+
+                .avatar {
+                    padding: 0;
+
+                    i {
+                        display: block;
+                    }
+                }
+            }
+        }
+
+        .content_container {
+
+            // padding: 0px !important;
+            .el-aside {
+                width: 0px !important;
+                // display: none
+            }
+
+            .el-main {
+                // width: 100% !important;
+
+                .agent {
+                    width: 100%;
+
+                    .dataView {
+                        width: 100%;
+
+                        .el-card {
+                            width: 32%;
+                            min-width: 150px;
+                            // width: 170px !important;
+                            // min-width: 200px !important;
+                        }
+
+                        .Count {
+                            background-color: #fff;
+                            // display: flex;
+                            // justify-content: space-around;
+                            display: block;
+
+                            .countfont {
+                                display: flex;
+                                justify-content: space-between;
+                                align-items: center;
+                                padding-top: 0px;
+                                padding-bottom: 8px;
+                                font-size: 12px;
+                                height: 30px;
+
+                                p {
+                                    display: inline;
+                                    font-size: 20px;
+                                    text-align: center;
+                                    font-weight: bold;
+                                    padding-top: 10px;
+                                }
+                            }
+                        }
+                    }
+
+                    .options {
+                        width: 100%;
+                        min-width: 450px;
+
+                        .icons {
+                            i {
+                                display: none;
+                            }
+                        }
+                    }
+
+                    .list {
+                        .card {
+                            width: 100% !important;
+                            min-width: 700px;
+
+                            .avatar {
+                                display: none;
+                            }
+
+                            .content {
+                                width: 100% !important;
+
+                                .msg {
+                                    padding: 15px 20px 20px 0;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+
+}
+
+@media screen and (max-width:1024px) and (min-width:769px) {
+    .content_container {
+        padding: 0 !important;
+
+        .agent {
+            width: 100%;
+
+            .dataView {
+                width: 100%;
+
+                .el-card {
+                    width: 32%;
+                }
+            }
+
+        }
+
+        .list {
+            .card {
+                width: 100% !important;
+                min-width: 700px;
+
+                .avatar {
+                    display: none;
+                }
+                .content {
+                    width: 100% !important;
+
+                    .msg {
+                        padding: 15px 20px 20px 0;
+                    }
+                }
+            }
+        }
+    }
+}

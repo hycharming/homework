@@ -1,0 +1,44 @@
+{
+  "id": "2733541",
+  "name": "homework",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-",
+  "description": "",
+  "glyphs": [
+    {
+      "icon_id": "10468853",
+      "name": "禁止",
+      "font_class": "icon-test",
+      "unicode": "e63e",
+      "unicode_decimal": 58942
+    },
+    {
+      "icon_id": "23452673",
+      "name": "dashboard",
+      "font_class": "dashboard-copy",
+      "unicode": "e8fa",
+      "unicode_decimal": 59642
+    },
+    {
+      "icon_id": "23452675",
+      "name": "分支机构",
+      "font_class": "fenzhijigou-copy",
+      "unicode": "e8fb",
+      "unicode_decimal": 59643
+    },
+    {
+      "icon_id": "23452676",
+      "name": "cruise",
+      "font_class": "cruise-copy",
+      "unicode": "e8fc",
+      "unicode_decimal": 59644
+    },
+    {
+      "icon_id": "23452684",
+      "name": "help",
+      "font_class": "help-copy",
+      "unicode": "e8fd",
+      "unicode_decimal": 59645
+    }
+  ]
+}
