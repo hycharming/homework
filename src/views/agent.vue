@@ -187,7 +187,7 @@ export default {
 
 <style lang="scss" scoped>
 .agent {
-  width: 900px;
+  width: 880px;
   .dataView {
     display: flex;
     justify-content: space-between;
