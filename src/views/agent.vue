@@ -65,23 +65,28 @@
         :imgSrc="
           require(`../assets/osIcons/${ListFilterMsg[index].imgSrc}.png`)
         "
-        :Url="'bjstdmngbgr' + ListFilterMsg[index].Url + '.thoughtworks.com'"
-        :State="ListFilterMsg[index].state"
-        Ip="192.168.1.243"
-        docSrc="/var/lib/cruise-agent"
+        :Url="ListFilterMsg[index].Url"
+        :State="ListFilterMsg[index].State"
+        :Ip="ListFilterMsg[index].Ip"
+        :docSrc="ListFilterMsg[index].docSrc"
         :idx="index"
         @isVisible="getVisible"
         :isvisible="isvisible"
-      ></Card>
+      >
+      </Card>
+      <el-empty v-if="!ListFilterMsg" description="暂无数据"></el-empty
+      >
     </div>
   </div>
 </template>
 
 <script>
 import Card from "../components/card";
+import dataAPI from "../service/api";
 export default {
   data() {
     return {
+      kind:'',
       activeName: "all",
       searchData: "",
       CountList: ["ALL", "PHYSICAL", "VIRTUAL"],
@@ -90,50 +95,15 @@ export default {
       ListFilterMsg: [],
       timer: 0, //防抖时间
       isvisible: false,
-      ListMsg: [
-        {
-          imgSrc: "windows",
-          Url: "01",
-          state: false,
-        },
-        {
-          imgSrc: "windows",
-          Url: "08",
-          state: true,
-        },
-        {
-          imgSrc: "ubuntu",
-          Url: "10",
-          state: true,
-        },
-        {
-          imgSrc: "debin",
-          Url: "11",
-          state: true,
-        },
-        {
-          imgSrc: "suse",
-          Url: "15",
-          state: false,
-        },
-        {
-          imgSrc: "cent_os",
-          Url: "01",
-          state: false,
-        },
-      ],
+      ListMsg: [],
     };
   },
   created() {
-    this.ListFilterMsg = this.ListMsg;
-    this.$axios
-      .get("js/data.json")
-      .then((res) => {
-        console.log("res:", res);
-      })
-      .catch((err) => {
-        console.log("err:", err);
-      });
+    dataAPI.dataRequest().then((res) => {
+      this.ListMsg = res.Card;
+      this.ListFilterMsg = this.ListMsg;
+      console.log(this.ListFilterMsg);
+    });
   },
   components: {
     Card,
@@ -143,24 +113,34 @@ export default {
     //   console.log(document.getElementById(`btn${idx}`));
     // },
     handleClick(res) {
+      this.kind = res.name
       this.ListFilterMsg = this.ListMsg.filter((item) => {
-        console.log(item.state);
-        if (res.name == "pyhsical") return item.state == true;
-        else if (res.name == "virtual") return item.state == false;
+        // console.log(res.name);
+        if (res.name == "pyhsical") return item.State == 'true';
+        else if (res.name == "virtual") return item.State == 'false';
         else return item;
       });
-        this.searchData = ''
+      this.searchData = "";
       console.log(this.ListFilterMsg);
     },
     searchDataChange() {
-      if (!this.searchData) {
-        this.ListFilterMsg = this.ListMsg;
-      } else {
-        this.ListFilterMsg = this.ListMsg.filter((item) => {
-          let str = "bjstdmngbgr" + item.Url + ".thoughtworks.com";
-          return str.indexOf(this.searchData) !== -1 ? item : "";
-        });
-      }
+      // if (!this.searchData) {
+      //   this.ListFilterMsg = this.ListMsg;
+      // } else {
+      //   this.ListFilterMsg = this.ListMsg.filter((item) => {
+      //     let str = item.Url;
+      //     return str.indexOf(this.searchData) !== -1 ? item : "";
+      //   });
+      // }
+      this.ListFilterMsg = this.ListMsg.filter(item=>{
+        let str = item.Url;
+        if(str.indexOf(this.searchData) !== -1){
+            if(this.kind == 'all') return item
+            else if(this.kind == 'pyhsical'){
+              return item.State == 'true'?item:'';
+            }else return item.State == 'false'?item:''
+        }
+      })
     },
     // 搜索框 防抖
     debounce(delay) {
@@ -186,6 +166,15 @@ export default {
 </script> 
 
 <style lang="scss" scoped>
+@mixin iconCss {
+  color: #fff;
+  font-size: 144px;
+  opacity: 20%;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
 .agent {
   width: 880px;
   .dataView {
@@ -202,26 +191,14 @@ export default {
       background-color: #ff9a2a;
       position: relative;
       .el-icon-s-tools {
-        color: #fff;
-        font-size: 144px;
-        opacity: 20%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        @include iconCss;
       }
     }
     .Idle {
       background-color: #7fbc39;
       position: relative;
       .el-icon-coffee-cup {
-        color: #fff;
-        font-size: 144px;
-        opacity: 20%;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
+        @include iconCss;
       }
     }
     .Count {

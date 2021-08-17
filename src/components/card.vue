@@ -5,7 +5,7 @@
     >
       <!-- 头像 -->
       <div class="avatar">
-        <img :src="imgSrc" alt="" />
+        <img v-lazy="imgSrc" alt="" />
       </div>
 
       <div class="content">
@@ -16,7 +16,9 @@
           </div>
 
           <div class="state">
-            <el-tag v-if="State" color="#ff9a2a" size="small">building</el-tag>
+            <el-tag v-if="State === 'true'" color="#ff9a2a" size="small"
+              >building</el-tag
+            >
             <el-tag v-else color="#7fbc39" size="small">idle</el-tag>
           </div>
 
@@ -51,7 +53,7 @@
             </span>
           </div>
 
-          <div class="deny" v-if="State">
+          <div class="deny" v-if="State === 'true'">
             <el-button>
               <i class="iconfont icon-icon-test"></i>
               <span>Deny</span>
@@ -220,10 +222,10 @@ export default {
       this.addTagData = "";
       this.$emit("isVisible", false);
     },
-    close(){
+    close() {
       this.visible = false;
       this.$emit("isVisible", false);
-    }
+    },
   },
   props: {
     imgSrc: {
@@ -235,8 +237,8 @@ export default {
       required: true,
     },
     State: {
-      type: Boolean,
-      default: false,
+      type: String,
+      default: 'false',
     },
     Ip: {
       type: String,
@@ -259,6 +261,12 @@ export default {
 </script>
 
 <style lang="scss" scoped>
+@mixin iCss($paddingLength: 5px) {
+  font-size: 20px;
+  color: #a9abac;
+  font-weight: bold;
+  padding-right: $paddingLength;
+}
 .card {
   width: 100%;
   padding: 10px 0;
@@ -282,10 +290,7 @@ export default {
           display: flex;
           align-items: center;
           i {
-            font-size: 20px;
-            color: #a9abac;
-            font-weight: bold;
-            padding-right: 10px;
+            @include iCss(10px);
           }
           span {
             color: #00b4cf;
@@ -303,10 +308,7 @@ export default {
           display: flex;
           align-items: center;
           i {
-            font-size: 20px;
-            color: #a9abac;
-            font-weight: bold;
-            padding-right: 5px;
+            @include iCss();
           }
           span {
             font-size: 14px;
@@ -316,10 +318,7 @@ export default {
           display: flex;
           align-items: center;
           i {
-            font-size: 20px;
-            color: #a9abac;
-            font-weight: bold;
-            padding-right: 5px;
+            @include iCss();
           }
           span {
             font-size: 14px;
